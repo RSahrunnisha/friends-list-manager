@@ -83,8 +83,10 @@ const Home = () => {
         ? -1
         : 1
     );
-    _displayList && setListLength(Math.ceil(_displayList.length / 4));
+    const _listLength = Math.ceil(_displayList.length / 4);
+    setListLength(_listLength);
     if (_displayList.length > 4) {
+      currentPage > _listLength && setCurrentPage(_listLength);
       const endIndex = currentPage * 4;
       const startIndex = endIndex - 4;
       _displayList = _displayList.slice(startIndex, endIndex);

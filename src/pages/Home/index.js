@@ -25,7 +25,7 @@ const Home = () => {
   const [listLength, setListLength] = useState();
   const [isVisible, setIsVisible] = useState(false);
   const [deleteIndex, setDeleteIndex] = useState();
-  const [searchData, setSearch] = useState();
+  const [searchValue, setSearchValue] = useState();
   const nameField = useRef();
   const searchField = useRef();
 
@@ -45,59 +45,36 @@ const Home = () => {
     }
   };
   const handleOnSearch = (event) => {
-    if (event.target.value) {
-      const filteredData = friendsList.filter((item) =>
-        item["name"]
-          .toString()
-          .toLowerCase()
-          .includes(event.target.value.toLowerCase())
-      );
-      setSearch(filteredData);
-    } else {
-      setSearch(null);
-    }
+    setSearchValue(event.target.value);
   };
   const setFavourite = (id, flag) => {
     const _friendsList = [...friendsList];
     const index = _friendsList.findIndex((item) => item["id"] === id);
     _friendsList[index].isFavourite = flag;
     setFriendsList(_friendsList);
-
-    if (searchData) {
-      const _searchData = [...searchData];
-      const filterDataIndex = _searchData.findIndex(
-        (item) => item["id"] === id
-      );
-      if (filterDataIndex !== -1) {
-        _searchData[filterDataIndex].isFavourite = flag;
-        setSearch(_searchData);
-      }
-    }
   };
 
-  const deleteFriend = (id) => {
+  const deleteFriend = () => {
     const _friendsList = [...friendsList];
 
-    const index = _friendsList.findIndex((item) => item["id"] === id);
+    const index = _friendsList.findIndex((item) => item["id"] === deleteIndex);
     _friendsList.splice(index, 1);
     setFriendsList(_friendsList);
-
-    if (searchData) {
-      const _searchData = [...searchData];
-      const filterDataIndex = _searchData.findIndex(
-        (item) => item["id"] === id
-      );
-      if (filterDataIndex !== -1) {
-        _searchData.splice(filterDataIndex, 1);
-        setSearch(_searchData);
-      }
-    }
     setIsVisible(false);
   };
 
   useEffect(() => {
-    let _displayList = searchData || friendsList;
-    let sorted = [..._displayList].sort((p1, p2) =>
+    let _displayList = [...friendsList];
+    if (searchValue) {
+      _displayList = _displayList.filter((item) =>
+        item["name"]
+          .toString()
+          .toLowerCase()
+          .includes(searchValue.toLowerCase())
+      );
+    }
+
+    _displayList = [..._displayList].sort((p1, p2) =>
       p1["isFavourite"] === p2["isFavourite"]
         ? p1["id"] > p2["id"]
           ? -1
@@ -106,14 +83,14 @@ const Home = () => {
         ? -1
         : 1
     );
-    _displayList && setListLength(Math.ceil(sorted.length / 4));
+    _displayList && setListLength(Math.ceil(_displayList.length / 4));
     if (_displayList.length > 4) {
       const endIndex = currentPage * 4;
       const startIndex = endIndex - 4;
-      sorted = sorted.slice(startIndex, endIndex);
+      _displayList = _displayList.slice(startIndex, endIndex);
     }
-    setDisplayList(sorted);
-  }, [searchData, friendsList, currentPage]);
+    setDisplayList(_displayList);
+  }, [friendsList, currentPage, searchValue]);
 
   return (
     <div className="home">
@@ -142,10 +119,7 @@ const Home = () => {
           <div className="container_body">
             {displayList &&
               displayList.map((item, index) => (
-                <div
-                  className="list-box"
-                  key={"myfriend-" + index}
-                >
+                <div className="list-box" key={"myfriend-" + index}>
                   <div className="details-left">
                     <h4>{item.name}</h4>
                     <span>is your friend</span>
@@ -190,7 +164,7 @@ const Home = () => {
       <Modal
         isVisible={isVisible}
         setIsVisible={setIsVisible}
-        onSuccessHandler={() => deleteFriend(deleteIndex)}
+        onSuccessHandler={deleteFriend}
       />
     </div>
   );

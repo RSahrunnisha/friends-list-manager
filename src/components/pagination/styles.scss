@@ -1,0 +1,23 @@
+.pagination {
+  .pagination_btn {
+    background: transparent;
+    border: 1px solid #00897b;
+    margin: 2px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    color: #00897b;
+    cursor: pointer;
+
+    &.active {
+      background-color: #00897b;
+      color: #fff;
+    }
+    &:focus {
+      outline: 0;
+    }
+    &:disabled {
+      cursor: no-drop;
+      opacity: 0.4;
+    }
+  }
+}

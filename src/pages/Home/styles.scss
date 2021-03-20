@@ -1,0 +1,212 @@
+.home {
+  .home_wrapper {
+    min-height: calc(100vh - 70px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .container {
+      width: 80%;
+      height: 500px;
+      padding: 10px;
+      max-width: 800px;
+
+      @media (max-width: 768px) {
+        width: 100%;
+        min-height: calc(100vh - 70px);
+      }
+
+      .container_header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        @media (max-width: 768px) {
+          align-items: center;
+          flex-direction: column-reverse;
+        }
+
+        input {
+          padding: 5px;
+          border-width: 0px 0px 1px;
+          outline: 0;
+          font-size: 16px;
+          line-height: 22px;
+          width: 32%;
+          border-color: #00897b;
+
+          @media (max-width: 768px) {
+            width: 100%;
+          }
+          &.search {
+            @media (max-width: 768px) {
+              margin-bottom: 20px;
+              border: 1px solid #00897b;
+              padding: 10px 5px;
+            }
+          }
+        }
+        ::placeholder {
+          /* Chrome, Firefox, Opera, Safari 10.1+ */
+          color: #c7c7c7;
+          opacity: 1; /* Firefox */
+        }
+
+        :-ms-input-placeholder {
+          /* Internet Explorer 10-11 */
+          color: #c7c7c7;
+        }
+
+        ::-ms-input-placeholder {
+          /* Microsoft Edge */
+          color: #c7c7c7;
+        }
+      }
+      .container_body {
+        padding: 10px 0;
+        min-height: 320px;
+        .list-box {
+          display: flex;
+          width: 100%;
+          justify-content: space-between;
+          align-items: center;
+          padding: 10px;
+          border-radius: 3px;
+          box-shadow: 0px 0px 3px 0px #00897b;
+          margin: 10px 0;
+
+          .details-left {
+            h4 {
+              font-size: 21px;
+              margin-bottom: 5px;
+            }
+            span {
+              font-size: 14px;
+              color: #696969;
+            }
+          }
+          .actions-right {
+            border: 0px;
+            background: none;
+            outline: 0;
+            font-size: 20px;
+            display: flex;
+
+            button {
+              cursor: pointer;
+              padding: 0;
+              margin-left: 15px;
+              border: 0;
+              background: no-repeat;
+              font-size: 28px;
+              color: #00897b;
+              outline: 0;
+
+              &:focus {
+                outline: 0;
+              }
+            }
+          }
+        }
+      }
+      .container_footer {
+        text-align: right;
+      }
+    }
+  }
+}
+
+.icon-trash {
+  width: 28px;
+  height: 22px;
+  position: relative;
+  overflow: hidden;
+}
+
+.icon-trash .trash-lid {
+  width: 62%;
+  height: 10%;
+  position: absolute;
+  left: 50%;
+  margin-left: -31%;
+  top: 10.5%;
+  background-color: #00897b;
+  border-top-left-radius: 80%;
+  border-top-right-radius: 80%;
+  -webkit-transform: rotate(-5deg);
+  -moz-transform: rotate(-5deg);
+  -ms-transform: rotate(-5deg);
+  transform: rotate(-5deg);
+}
+
+.icon-trash .trash-lid:after {
+  content: "";
+  width: 26%;
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  margin-left: -13%;
+  margin-top: -10%;
+  background-color: inherit;
+  border-top-left-radius: 30%;
+  border-top-right-radius: 30%;
+  -webkit-transform: rotate(-1deg);
+  -moz-transform: rotate(-1deg);
+  -ms-transform: rotate(-1deg);
+  transform: rotate(-1deg);
+}
+
+.icon-trash .trash-container {
+  width: 56%;
+  height: 65%;
+  position: absolute;
+  left: 50%;
+  margin-left: -28%;
+  bottom: 10%;
+  background-color: #00897b;
+  border-bottom-left-radius: 15%;
+  border-bottom-right-radius: 15%;
+}
+
+.icon-trash .trash-container:after {
+  content: "";
+  width: 110%;
+  height: 12%;
+  position: absolute;
+  left: 50%;
+  margin-left: -55%;
+  top: 0;
+  background-color: inherit;
+  border-bottom-left-radius: 45%;
+  border-bottom-right-radius: 45%;
+}
+
+.icon-trash .trash-line-1 {
+  width: 4%;
+  height: 50%;
+  position: absolute;
+  left: 38%;
+  margin-left: -2%;
+  bottom: 17%;
+  background-color: #fff;
+}
+
+.icon-trash .trash-line-2 {
+  width: 4%;
+  height: 50%;
+  position: absolute;
+  left: 50%;
+  margin-left: -2%;
+  bottom: 17%;
+  background-color: #fff;
+}
+
+.icon-trash .trash-line-3 {
+  width: 4%;
+  height: 50%;
+  position: absolute;
+  left: 62%;
+  margin-left: -2%;
+  bottom: 17%;
+  background-color: #fff;
+}
